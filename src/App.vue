@@ -5,6 +5,7 @@ import { getSongs } from '@/firebase/songs'
 import type { Song } from '@/types/songs'
 // components
 import SongsList from '@/components/SongsList.vue'
+import SongsPlayer from '@/components/SongsPlayer.vue'
 
 const songs = ref<Song[]>([])
 
@@ -15,8 +16,22 @@ onMounted(() => {
 
 <template>
   <div class="app">
-    <songs-list :songs="songs" />
+    <main>
+      <songs-player />
+      <songs-list :songs="songs" />
+    </main>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.app {
+  display: grid;
+  place-content: center;
+  min-height: 100vh;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+</style>
