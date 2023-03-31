@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { getSongs } from '@/firebase/songs'
+import { getSongs, addSongs } from '@/firebase/songs'
 // import types
 import type { Song } from '@/types/songs'
 // components
@@ -40,8 +40,11 @@ onMounted(() => {
   getSongs(songs)
 })
 
-const addToFavorite = (songId: string) => {
-  console.log(songId)
+const addToFavorite = async (songId: string) => {
+  const song = playingSongs.find((song) => song.id === songId)
+  if (song) {
+    await addSongs(song)
+  }
 }
 </script>
 

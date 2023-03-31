@@ -14,6 +14,10 @@
           <v-icon icon="mdi-headphones"></v-icon>
         </template>
 
+        <template v-slot:append>
+          <v-icon @click="deleteSong(song.id)" icon="mdi-close"></v-icon>
+        </template>
+
         <v-list-item-title>
           {{ song.title }}
         </v-list-item-title>
@@ -24,6 +28,7 @@
 
 <script setup lang="ts">
 import type { Song } from '@/types/songs'
+import { deleteSong } from '@/firebase/songs'
 
 defineProps<{
   songs: Song[]
