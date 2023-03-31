@@ -6,6 +6,9 @@
       <div v-if="isLoading" class="d-flex justify-center align-center loading-height">
         Loading...
       </div>
+      <div v-else-if="songs.length < 1" class="d-flex justify-center align-center loading-height">
+        List is empty
+      </div>
       <v-list-item
         v-for="(song, i) in songs"
         :key="i"
