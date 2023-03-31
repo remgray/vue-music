@@ -3,12 +3,16 @@
     <v-list>
       <v-list-subheader>FAVORITE SONGS</v-list-subheader>
 
+      <div v-if="isLoading" class="d-flex justify-center align-center loading-height">
+        Loading...
+      </div>
       <v-list-item
         v-for="(song, i) in songs"
         :key="i"
         :value="song"
         active-color="primary"
         rounded="shaped"
+        v-else
       >
         <template v-slot:prepend>
           <v-icon icon="mdi-headphones"></v-icon>
@@ -29,8 +33,8 @@
 <script setup lang="ts">
 import type { Song } from '@/types/songs'
 import { deleteSong } from '@/firebase/songs'
-
 defineProps<{
   songs: Song[]
+  isLoading: boolean
 }>()
 </script>

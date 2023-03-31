@@ -8,9 +8,10 @@ import type { Ref } from 'vue'
 
 const DB_NAME = 'songs'
 
-export const getSongs = async (songs: Ref<Song[]>) => {
+export const getSongs = async (songs: Ref<Song[]>, isLoading: Ref<boolean>) => {
   const q = query(collection(db, DB_NAME))
 
+  isLoading.value = true
   onSnapshot(q, (querySnapshot) => {
     const tempSongs: Song[] = []
     querySnapshot.forEach((doc) => {
@@ -20,6 +21,7 @@ export const getSongs = async (songs: Ref<Song[]>) => {
       } as Song)
     })
     songs.value = tempSongs
+    isLoading.value = false
   })
 }
 
